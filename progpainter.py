@@ -14,13 +14,13 @@ class Win(QWidget):
         self.title = title
         self.initUI()
         self.setMouseTracking(True)
-        qp.begin(self)
+        # qp.begin(self)
         self._init()
-        qp.end()
+        # qp.end()
 
 
     def initUI(self):
-        self.setGeometry(300, 300, 300, 190)
+        self.setGeometry(300,300, 300, 190)
         self.setWindowTitle(self.title)
         self.show()
 
@@ -33,7 +33,8 @@ class Win(QWidget):
 
     def mousePosition(self):
         mpos = self.cursor().pos()
-        return mpos.x(), mpos.y()
+        fpos = self.pos()
+        return mpos.x()-fpos.x(), mpos.y()-fpos.y()
 
 
     # def updt(self):
@@ -47,7 +48,7 @@ def line(start, stop):
     qp.drawLine(start[0], start[1], stop[0], stop[1])
 
 def circle(center, radius=5):
-    qp.drawEllipse(center[0], center[1], radius, radius)
+    qp.drawEllipse(center[0]-radius//2, center[1]-radius//2, radius, radius)
 
 def rectangle(center, width=5, height=5):
     qp.drawRect(center[0]-width//2, center[1]-height//2, width, height)
