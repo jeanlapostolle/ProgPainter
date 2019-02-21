@@ -36,13 +36,22 @@ class Win(QWidget):
         fpos = self.pos()
         return mpos.x()-fpos.x(), mpos.y()-fpos.y()
 
+    def mousePressEvent(self, e):
+        qp.begin(self)
+        self._press()
+        qp.end()
+
+
+    def mouseMoveEvent(self, e):
+        pass
+
 
     # def updt(self):
     #     self.update()
 
 
 def point(x):
-    qp.drawPoint(x[0], y[1])
+    qp.drawPoint(x[0], x[1])
 
 def line(start, stop):
     qp.drawLine(start[0], start[1], stop[0], stop[1])
@@ -52,6 +61,14 @@ def circle(center, radius=5):
 
 def rectangle(center, width=5, height=5):
     qp.drawRect(center[0]-width//2, center[1]-height//2, width, height)
+
+def mapping(element, source, destination):
+    a, b = source
+    c, d = destination
+    if a == b:
+        print(" error source is not ok in mapping")
+        return 0
+    return c + (element-a)*(d-c)/(b-a)
 
 
 colorD = {'red' : Qt.red, 'blue' : Qt.blue, 'green' : Qt.green, 'yellow' : Qt.yellow, 'cyan' : Qt.cyan, 'magenta' : Qt.magenta, 'white' : Qt.white, 'black': Qt.black}
